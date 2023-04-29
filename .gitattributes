@@ -1,0 +1,27 @@
+
+# Source files
+# ============
+*.pxd		text
+*.py 		text
+*.py3 		text
+*.pyw 		text
+*.pyx  		text
+*.html text
+
+*.css linguist-language=Python
+/static/* linguist-vendored=True
+*/static/* linguist-vendored=True
+*.html linguist-language=True
+# Binary files
+# ============
+*.db		binary
+*.p 		binary
+*.pkl 		binary
+*.pyc 		binary
+*.pyd		binary
+*.pyo 		binary
+
+# Note: .db, .p, and .pkl files are associated
+# with the python modules ``pickle``, ``dbm.*``,
+# ``shelve``, ``marshal``, ``anydbm``, & ``bsddb``
+# (among others).
