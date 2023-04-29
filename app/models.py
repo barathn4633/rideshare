@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from notifications.models import *
 
 from broadcast.models import Broadcast
+from django_cryptography.fields import encrypt
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -40,7 +41,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                           validators.RegexValidator(re.compile(
                                               '^0x[a-fA-F0-9]{40}$'), _('Enter a valid wallet address starting with "0x".'), 'invalid')
                                       ])
-
+    private_key= models.CharField(_('Pri key'), max_length=42, blank=True,help_text=_('Required. to make payments, enter a private key'))
+                                     
+    # pri_key = models.CharField(_('private key'),max_length=255, blank=True, null=True)
 
     user_choices = (('Driver', 'Driver'), ('Passenger', 'Passenger'))
     user_type = models.CharField(_('user type'), max_length=30, blank=False, choices=user_choices)
@@ -211,7 +214,7 @@ class Request(models.Model):
     dest = models.CharField(_('destination'), max_length=256, blank=False)
     reg_date = models.DateTimeField(_('registration date'), default=timezone.now)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    bearable = models.IntegerField(_('bearable cost'), blank=False)
+    bearable = models.DecimalField(_('bearable cost'),max_digits=40, decimal_places=15, blank=False)
     status = models.CharField(_('status'), max_length=256, blank=False, default='pending')
     ride = models.ForeignKey(VehicleSharing, on_delete=models.CASCADE)
     payment_made = models.BooleanField(_('payment made or not'), default=False)

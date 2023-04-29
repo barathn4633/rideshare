@@ -15,8 +15,10 @@ from django import forms as fm
 from notifications.signals import notify
 from django.template import defaultfilters
 from django.contrib import messages as pop
-from django.http import Http404
+from django.http import Http404,HttpResponseBadRequest
 from django.template import RequestContext
+from web3 import Web3
+from django.conf import settings
 
 
 
@@ -480,7 +482,7 @@ def requests_driver_view(request,user_id):
 @login_required
 def request_approve(request,request_id):
     pass_requests = Request.objects.get(pk=request_id)
-    print(request_id)
+    # print(request_id)
     back = request.META.get('HTTP_REFERER','/')
 
 
@@ -549,20 +551,18 @@ def requests_user_view(request,user_id):
 def request_view(request,request_id):
     req = get_object_or_404(Request, pk=request_id)
     dir=0
+    print(req.payment_made)
     if request.user == req.user :
         context = {
 
             'user_requests': req,
         }
-        # print(dir)
         return render(request, 'app/request/single_request.html', context)
     
     elif request.user.user_type == 'Driver':
-        dir=1
         context = {
 
             'user_requests': req,
-            'dir':dir
             
         }
         return render(request, 'app/request/single_request.html', context)
@@ -905,11 +905,13 @@ def user_update(request):
         phone = request.POST['phone']
         # print(user.wallet_address)
         wallet_address=request.POST['wallet_address']
+        private_key = request.POST['private_key']
 
         if email and phone:
             user.email = email
             user.phone_number = phone
             user.wallet_address=wallet_address
+            user.private_key=private_key
             user.save()
             pop.add_message(request,pop.SUCCESS,"User Information Updated Successfully")
             return redirect('app:preferences')
@@ -1035,11 +1037,80 @@ def password_update(request):
     else:
         raise Http404
 # payment
+# @login_required
+# def payment(request,user_id):
+
+#     req = get_object_or_404(Request, pk=user_id)
+#     receiver_address=req.ride.user.wallet_address
+#     sender_private_key=request.user.private_key
+#     sender_wallet_address=request.user.wallet_address
+#     price=req.bearable
+
+#     print("made payment")
+#     return redirect('app:request_view',user_id)
+
+
+
+
+    # req.payment_made = True
+    # print(req)
+    # req.save()
+
+
+
+
 @login_required
-def payment(request,user_id):
-    pass_requests = Request.objects.get(pk=user_id)
-    
-    pass_requests.payment_made = True
-    pass_requests.save()
-    print("made payment")
-    return redirect('app:request_view',user_id)
+def payment(request, user_id):
+    req = get_object_or_404(Request, pk=user_id)
+
+
+    receiver_address = req.ride.user.wallet_address
+    sender_private_key = request.user.private_key
+    sender_wallet_address = request.user.wallet_address
+    price_in_eth = req.bearable
+   
+    # Connect to Ethereum node
+    web3 = Web3(Web3.HTTPProvider('https://sepolia.infura.io/v3/465fc549b7164cc8a97e3aab0147f298'))
+
+    # Get sender's account balance
+    sender_balance = web3.eth.get_balance(sender_wallet_address)
+    print(f"Sender balance: {sender_balance} wei")
+
+    # Convert price to wei (1 ETH = 10^18 wei)
+    price_in_wei = web3.to_wei(price_in_eth, 'ether')
+
+    # Check if sender has enough balance to make the payment
+    if sender_balance < price_in_wei:
+        return HttpResponseBadRequest("Insufficient balance")
+
+    # Build transaction
+    nonce = web3.eth.get_transaction_count(sender_wallet_address)
+    gas_price = web3.eth.gas_price
+    gas_limit = 21000  # Fixed for simple transfers
+    tx = {
+        'nonce': nonce,
+        'to': receiver_address,
+        'value': price_in_wei,
+        'gas': gas_limit,
+        'gasPrice': gas_price,
+    }
+
+    # Sign transaction with sender's private key
+    signed_tx = web3.eth.account.sign_transaction(tx, sender_private_key)
+
+    # Send transaction to Ethereum network
+    tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
+    print(f"Transaction sent: {web3.to_hex(tx_hash)}")
+
+    # Update request object and save to database
+    req.payment_made = True
+    print(req.payment_made)
+    # req.payment_tx_hash = web3.to_hex(tx_hash)
+    req.save()
+
+    return redirect('app:request_view', user_id)
+
+
+
+
+

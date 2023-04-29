@@ -49,7 +49,9 @@ INSTALLED_APPS = [
   'corsheaders',
   'rest_framework.authtoken',
   'cloudinary_storage',
-  'cloudinary'
+  'cloudinary',
+  'django_cryptography',
+  'cryptography'
 
 ]
 

@@ -70,6 +70,7 @@ urlpatterns = [
 
 
 
+
     url(r'^requests/all$',views.all_ride_requests, name='view_ride_requests'),
     url(r'^request/(?P<request_id>[0-9]+)/approve/$', views.request_approve, name='request_driver_approve'),
     url(r'^request/(?P<request_id>[0-9]+)/deny/$', views.request_deny, name='request_driver_deny'),
