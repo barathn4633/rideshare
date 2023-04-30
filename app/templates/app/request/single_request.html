@@ -49,8 +49,8 @@
                                 
                                 {% if user_requests.payment_made %}
                                     <li><a href="#">&nbsp; <span class="pull-left badge bg-green">&nbsp;Made Payment&nbsp;<i class="fa fa-check"></i></span></a></li>
+                                    <li><a href="https://sepolia.etherscan.io/tx/{{user_requests.tx_id}}" target="_blank" >&nbsp; <span class="btn btn-primary btn-sm">&nbsp;View trasaction details &nbsp;<i class="fa "></i></span></a></li>
                                 {% else %}
-                                    {% comment %} <li><a href="#">&nbsp; <span class="pull-left badge bg-red">&nbsp;Not Paid&nbsp;<i class="fa fa-times"></i></span></a></li> {% endcomment %}
                                     <li>
                                         <div style="display: inline-block;">
                                             <a style="position: relative; margin: 0 18px;" href="#" class="badge bg-red">&nbsp;Not Paid&nbsp;<i class="fa fa-times"></i></a>
@@ -60,9 +60,6 @@
                                         </div>
                                       </li>
                                 {% endif %}                            
-
-
-
                                 {% if user_requests.status == 'approved' %}
                                     <li class="ride-people">
                                         <a style="color: green">

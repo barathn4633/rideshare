@@ -218,6 +218,7 @@ class Request(models.Model):
     status = models.CharField(_('status'), max_length=256, blank=False, default='pending')
     ride = models.ForeignKey(VehicleSharing, on_delete=models.CASCADE)
     payment_made = models.BooleanField(_('payment made or not'), default=False)
+    tx_id = models.CharField(_('transaction ID'), max_length=256, blank=True, null=True)
     
     def __str__(self):
         return "request from " + self.user.get_full_name() + " on " + self.reg_date.isoformat(' ')[0:16]

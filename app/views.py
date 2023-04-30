@@ -22,6 +22,7 @@ from django.conf import settings
 
 
 
+
 # import pusher
 #
 # pusher_client = pusher.Pusher(
@@ -471,6 +472,7 @@ def requests_driver_view(request,user_id):
     shared_veh = VehicleSharing.objects.filter(pk=req).order_by('date').reverse()
     pass_requests = Request.objects.filter(ride=shared_veh).order_by('reg_date')
     
+
     context = {
         'user': user,
         'pass_requests': pass_requests,
@@ -549,8 +551,6 @@ def requests_user_view(request,user_id):
 @login_required
 def request_view(request,request_id):
     req = get_object_or_404(Request, pk=request_id)
-    dir=0
-    print(req.payment_made)
     if request.user == req.user :
         context = {
 
@@ -1101,12 +1101,15 @@ def payment(request, user_id):
     tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
     print(f"Transaction sent: {web3.to_hex(tx_hash)}")
 
-    # Update request object and save to database
+    # # Update request object and save to database
     req.payment_made = True
-    print(req.payment_made)
-    # req.payment_tx_hash = web3.to_hex(tx_hash)
+    tx_url=f'https://sepolia.etherscan.io/tx/{web3.to_hex(tx_hash)}'
+    req.tx_id=web3.to_hex(tx_hash)
+    print(tx_url)
+    print(req.tx_id)
     req.save()
-
+    
+    print("payment function exit")
     return redirect('app:request_view', user_id)
 
 

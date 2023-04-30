@@ -182,7 +182,7 @@ class VehicleShareAdmin(admin.ModelAdmin):
     list_filter = ('date','ended','no_pass')
 admin.site.register(VehicleSharing,VehicleShareAdmin)
 class RequestAdmin(admin.ModelAdmin):
-    list_display = ('user','reg_date','ride','bearable','status','payment_made')
+    list_display = ('user','reg_date','ride','bearable','status','payment_made','tx_id')
     list_filter = ('ride','status','reg_date')
 admin.site.register(Request,RequestAdmin)
 
