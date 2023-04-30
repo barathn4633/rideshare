@@ -1082,7 +1082,6 @@ def payment(request, user_id):
     print(tx_url)
     print(req.tx_id)
     req.save()
-    
     print("payment function exit")
     return redirect('app:request_view', user_id)
 
