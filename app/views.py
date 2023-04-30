@@ -1035,26 +1035,6 @@ def password_update(request):
 
     else:
         raise Http404
-# payment
-# @login_required
-# def payment(request,user_id):
-
-#     req = get_object_or_404(Request, pk=user_id)
-#     receiver_address=req.ride.user.wallet_address
-#     sender_private_key=request.user.private_key
-#     sender_wallet_address=request.user.wallet_address
-#     price=req.bearable
-
-#     print("made payment")
-#     return redirect('app:request_view',user_id)
-
-
-
-
-    # req.payment_made = True
-    # print(req)
-    # req.save()
-
 
 
 
@@ -1071,21 +1051,19 @@ def payment(request, user_id):
     # Connect to Ethereum node
     web3 = Web3(Web3.HTTPProvider('https://sepolia.infura.io/v3/465fc549b7164cc8a97e3aab0147f298'))
 
-    # Get sender's account balance
+    # get balance
     sender_balance = web3.eth.get_balance(sender_wallet_address)
     print(f"Sender balance: {sender_balance} wei")
 
-    # Convert price to wei (1 ETH = 10^18 wei)
     price_in_wei = web3.to_wei(price_in_eth, 'ether')
 
-    # Check if sender has enough balance to make the payment
     if sender_balance < price_in_wei:
-        return HttpResponseBadRequest("Insufficient balance")
+        return redirect('https://giphy.com/gifs/family-guy-stewie-4mbL3aNbIHmP6/fullscreen')
 
     # Build transaction
     nonce = web3.eth.get_transaction_count(sender_wallet_address)
     gas_price = web3.eth.gas_price
-    gas_limit = 21000  # Fixed for simple transfers
+    gas_limit = 21000  
     tx = {
         'nonce': nonce,
         'to': receiver_address,
@@ -1093,15 +1071,11 @@ def payment(request, user_id):
         'gas': gas_limit,
         'gasPrice': gas_price,
     }
-
-    # Sign transaction with sender's private key
     signed_tx = web3.eth.account.sign_transaction(tx, sender_private_key)
 
-    # Send transaction to Ethereum network
     tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
     print(f"Transaction sent: {web3.to_hex(tx_hash)}")
 
-    # # Update request object and save to database
     req.payment_made = True
     tx_url=f'https://sepolia.etherscan.io/tx/{web3.to_hex(tx_hash)}'
     req.tx_id=web3.to_hex(tx_hash)
