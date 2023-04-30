@@ -212,7 +212,7 @@
                                 <span role="presentation" class="tooltip-link" data-original-title="Bearable Cost"
                                     data-toggle="tooltip">
                                     <i class="fa fa-money"></i>&nbsp;
-                                    ₦ {{ pass_request.bearable }}  ₦ {{ pass_request.ride.cost }}
+                                    &#3647; {{ pass_request.bearable }}  &#3647; {{ pass_request.ride.cost }}
                                 </span>
                     <br>
 
@@ -232,7 +232,9 @@
 
                                 {% if not pass_request.ride.ended and pass_request.status != 'canceled' %}
                                     {% if pass_request.status == 'approved' %}
+                                        {% if not pass_request.payment_made %}
                                         <a href="{% url 'app:request_driver_deny' pass_request.id %}" style="cursor: pointer;text-decoration: none" class="btn-danger btn-sm btn" >  <i class="fa fa-close "></i>&nbsp;Deny </a>
+                                        {% endif %}
                                     {% elif pass_request.status == 'denied' %}
                                         <a href="{% url 'app:request_driver_approve' pass_request.id %}" style="cursor: pointer;text-decoration: none" class="btn-success btn-sm btn" >  <i class="fa fa-check "></i>&nbsp;Approve </a>
                                     {% else %}

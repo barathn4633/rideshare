@@ -90,8 +90,10 @@
                             <li>
                                 {% if user_requests.ride.user == request.user %}
                                 {% if not user_requests.ride.ended and user_requests.status != 'canceled' %}
-                                    {% if user_requests.status == 'approved' %}
+                                    {% if user_requests.status == 'approved'%}
+                                        {% if not  user_requests.payment_made%}
                                         <a href="{% url 'app:request_driver_deny' user_requests.id %}" style="cursor: pointer;text-decoration: none" class="btn-danger btn-sm btn" >  <i class="fa fa-close "></i>&nbsp;Deny </a>
+                                        {% endif %}
                                     {% elif pass_requests.status == 'denied' %}
                                         <a href="{% url 'app:request_driver_approve' user_requests.id %}" style="cursor: pointer;text-decoration: none" class="btn-success btn-sm btn" >  <i class="fa fa-check "></i>&nbsp;Approve </a>
                                     {% else %}

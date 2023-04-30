@@ -470,8 +470,7 @@ def requests_driver_view(request,user_id):
     req = request.POST['share_id']
     shared_veh = VehicleSharing.objects.filter(pk=req).order_by('date').reverse()
     pass_requests = Request.objects.filter(ride=shared_veh).order_by('reg_date')
-
-
+    
     context = {
         'user': user,
         'pass_requests': pass_requests,
