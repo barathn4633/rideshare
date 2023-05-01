@@ -17,7 +17,7 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link rel="stylesheet" href="{% static "app/dist/css/skins/app-skin.css" %}">
+    {% comment %} <link rel="stylesheet" href="{% static "app/dist/css/skins/app-skin.css" %}">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'app/icons/apple-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'app/icons/apple-icon-60x60.png' %}">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'app/icons/apple-icon-72x72.png' %}">
@@ -30,9 +30,9 @@
     <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'app/icons/android-icon-192x192.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'app/icons/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'app/icons/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'app/icons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'app/icons/favicon-16x16.png' %}"> {% endcomment %}
     <link rel="manifest" href="{% static 'app/icons/manifest.json' %}">
-    <link rel="icon" href="{% static 'app/icons/favicon.ico' %}">
+    <link rel="icon" href="{% static 'app/icons/favicon.jpg' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{% static 'app/icons/ms-icon-144x144.png' %}">
     <meta name="theme-color" content="#ffffff">
@@ -53,47 +53,56 @@
         background: transparent;
     }
     #logo-text{
-        color: white;
+        color: black;
     }
     html{
 
-        background: url({% static 'app/img/cover.jpg' %}) no-repeat center center fixed;
+        background: url({% static 'app/img/cover-gif.gif' %}) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
     }
+    .bg_color_of_login{
+        color: white;
+        background-color: #323232;
+    }
 </style>
 
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" >
     <div class="login-box" >
         <div class="login-logo">
-            <a href="/" id="logo-text"><i class="fa fa-car"></i>&nbsp;<b>My</b>ride</a>
+            <a href="/" id="logo-text"><i class="fa"></i>&nbsp;
+                <img src="{% static 'app/icons/favicon.jpg' %}" style="display: inline-block; height: 80px; margin-right: 5px;" alt="">
+                <span style="display: inline-block; vertical-align: middle;">
+                    <!-- <b>RideShareX</b> -->
+                </span>
+            </a>
         </div>
         <!-- /.login-logo -->
-        <div class="login-box-body">
-            <h4 class="login-box-msg">Log in to start your session</h4>
+        <div class="login-box-body bg_color_of_login" >
+            <h4 class="login-box-msg"><b>Log In</b></h4>
             {% if error_message %}
                 <p class="error alert-danger alert"><strong>{{ error_message }}</strong></p>
             {% endif %}
             <form action="{% url 'app:login_user' %}?next=/" method="post">
                 {% csrf_token %}
                     <div class="form-group has-feedback">
-                        <input name="username" type="text" class="form-control" placeholder="Username" required>
-                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        <input name="username" type="text" class="form-control" placeholder="enter your username here" required>
+                        <span class=" form-control-feedback"></span>
                     </div>
                 <div class="form-group has-feedback">
-                    <input name="password" type="password" class="form-control" placeholder="Password" required>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <input name="password" type="password" class="form-control" placeholder="enter your password here" required>
+                    <span class="  form-control-feedback"></span>
                     <br>
-                <a href="#" class="pull-right">Forgot password?</a><br>
+                <a href="#" class="pull-right" style="color: white;">Forgot password?</a><br>
                 </div>
                 <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                 <div class="row">
                     <!-- /.col -->
                     <div class="col-xs-offset-8 col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" style="color: black; background-color: whitesmoke;" >Log In</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -111,7 +120,7 @@
 
 
 
-            <a href="{% url 'app:sign_up' %}" class="text-center">Register</a>
+            <a href="{% url 'app:sign_up' %}" class="text-center" style="color: white;">Register</a>
 
         </div>
         <!-- /.login-box-body -->
