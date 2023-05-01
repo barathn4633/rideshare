@@ -4,13 +4,13 @@
 {% load el_pagination_tags %}
 {% block cont-header %}
     <section class="content-header">
-        <h1>
-            Home
+        <h1 style="margin-left:450px ;">
+            Welcome to RideShareX
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="{% url 'app:dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <ol class="breadcrumb"  >
+            <li ><a tyle="color:white;" href="{% url 'app:dashboard' %}"><i class="fa fa-dashboard" ></i> <b>dashboard</b></a></li>
 
-            <li class="active">Home</li>
+            <li class="active"><b >Home</b></li>
         </ol>
     </section>
 {% endblock %}
@@ -37,7 +37,7 @@
 
 
         <!-- Main content -->
-        <section class="content">
+        <section class="content" ">
 
             <div class="row">
                 <div class="col-md-3">
@@ -56,23 +56,16 @@
                             <p class="text-muted text-center">{{ user.user_type }}</p>
 
                             <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
+                                {% comment %} <li class="list-group-item">
                                     <b>Followers</b> <a class="pull-right">{{ user.get_no_followers }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Following</b> <a class="pull-right">{{ user.get_no_following }}</a>
-                                </li>
-                                {% if user.user_type == 'Driver' %}
-                                    <li class="list-group-item">
-                                        <b>Rides shared</b> <a class="pull-right">{{ user.no_of_rides_shared }}</a>
-                                    </li>
-                                {% endif %}
-                                <li class="list-group-item">
-                                    <b>Rides taken</b> <a class="pull-right">{{ user.no_of_request_completed }}</a>
-                                </li>
-                                <li class="list-group-item">
+                                </li> {% endcomment %}
+                               
+                                {% comment %} <li class="list-group-item">
                                     <b>Broadcasts</b> <a class="pull-right">{{ user.get_no_broadcast }}</a>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
 
                             {#                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>#}
@@ -80,7 +73,7 @@
                         <!-- /.box-body -->
                     </div>
 
-                    <div class="box box-primary">
+                    {% comment %} <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title "><i class="fa fa-users"></i>&nbsp;Followers</h3>
 
@@ -107,7 +100,7 @@
                             {#                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>#}
                         </div>
                         <!-- /.box-body -->
-                    </div>
+                    </div> {% endcomment %}
 
                     <!-- /.box -->
 
@@ -365,39 +358,46 @@
                     <div class="box box-info">
                         <div class="box-header with-border">
 
-                            <h3 class="box-title "><i class="fa fa-info"></i>&nbsp;Getting Started</h3>
+                            <h3 class="box-title "><i class="fa "></i>&nbsp;All the functions</h3>
 
                             <!-- /.box-tools -->
                         </div>
 
                         <div class="box-body ">
-                            <p class="lead text-center">Welcome</p>
+                            {% comment %} <p class="lead text-center">Welcome</p> {% endcomment %}
 
-                            <p class="text-bold">What you can do...</p>
-                            <dl>
-                                <dt><a href="{% url 'app:search_ride' request.user.id %}">Search Rides</a></dt>
-                                <dd><p>Are you looking to find a cheaper means of road transport,
-                                    Search for rides going to your destination or passing your route.
-                                    You can also put out a ride broadcast to your followers or anyone wiling to pick you up.
-                                    Now you can find some new favourite place to chill out,you have no
-                                    longer got excuse for not travelling and discovering.</p></dd>
-                                <dt><a href="{% url 'app:requests_user_view' request.user.id %}">View Requested Rides</a></dt>
-                                <dd><p>You can view all rides that you have requested for and their details.</p></dd>
-
+                           
+                            <div  >
+                                <a href="{% url 'app:search_ride' request.user.id %}">
+                                    <button class="btn">Search Rides</button>
+                                </a>
+                            
+                                <a href="{% url 'app:requests_user_view' request.user.id %}">
+                                    <button class="btn">View Requested Rides</button>
+                                </a>
+                            
                                 {% if request.user.user_type == 'Driver' %}
-                                <dt><a href="{% url 'app:add_ride' request.user.id %}">Add a Ride</a></dt>
-                                <dd><p>You need to add a ride to your collection. Fill in the form and you are
-                                ready to start sharing rides.</p></dd>
-                                <dt><a href="{% url 'app:view_rides' request.user.id %}">Share a Ride</a></dt>
-                                <dd><p>Are you getting sick of traveling alone and spent so much money on gas?
-                                    Share your ride today,and forget about this problems. <span class="text-red
-                                "><b>REMEMBER,</b></span> Only share rides with people you trust.</p></dd>
-                                <dt><a href="{% url 'app:view_shared' request.user.id %}">View Shared Rides</a></dt>
-                                <dd><p>You can view records of all requested rides so far</p></dd>
+                                    <a href="{% url 'app:add_ride' request.user.id %}">
+                                        <button class="btn">Add a Ride</button>
+                                    </a>
+                            
+                                    <a href="{% url 'app:view_rides' request.user.id %}">
+                                        <button class="btn">Share a Ride</button>
+                                    </a>
+                            
+                                    <a href="{% url 'app:view_shared' request.user.id %}">
+                                        <button class="btn">View Shared Rides</button>
+                                    </a>
                                 {% endif %}
-
-
-                            </dl>
+                                {% if user.user_type == 'Driver' %}
+                                <li class="list-group-item">
+                                    <b>Rides shared</b> <a class="pull-right">{{ user.no_of_rides_shared }}</a>
+                                </li>
+                            {% endif %}
+                            <li class="list-group-item">
+                                <b>Rides taken</b> <a class="pull-right">{{ user.no_of_request_completed }}</a>
+                            </li>
+                            </div>
                             <!-- /.mail-box-messages -->
                         </div>
                     </div>

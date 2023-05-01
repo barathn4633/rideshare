@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MY RIDE</title>
+    <title>RideShareX</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -25,7 +25,7 @@
 
     <!-- Modernizr -->
     <script src={% static 'app/js/modernizr.js' %}></script>
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'app/icons/apple-icon-57x57.png' %}">
+    {% comment %} <link rel="apple-touch-icon" sizes="57x57" href="{% static 'app/icons/apple-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'app/icons/apple-icon-60x60.png' %}">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'app/icons/apple-icon-72x72.png' %}">
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'app/icons/apple-icon-76x76.png' %}">
@@ -37,9 +37,9 @@
     <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'app/icons/android-icon-192x192.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'app/icons/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'app/icons/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'app/icons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'app/icons/favicon-16x16.png' %}"> {% endcomment %}
     <link rel="manifest" href="{% static 'app/icons/manifest.json' %}">
-    <link rel="icon" href="{% static 'app/icons/favicon.ico' %}">
+    <link rel="icon" href="{% static 'app/icons/favicon.jpg' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{% static 'app/icons/ms-icon-144x144.png' %}">
     <meta name="theme-color" content="#ffffff">
@@ -81,7 +81,7 @@
 
     <!-- Content Wrapper. Contains page content -->
 
-    <div class="content-wrapper" style="min-height: 144px;">
+    <div class="content-wrapper " min-height: 144px;">
         <div class="container">
             <!-- Content Header (Page header) -->
            {% block cont-header %}
@@ -107,11 +107,11 @@
             <a href="{% url 'app:about' %}">About</a> |
             <a href="{% url 'app:contact' %}">Contact</a> |
             <a href="{% url 'app:login' %}">Login/Signup</a> |
-            <a href="http://www.theboynamedme.com">Blog</a> |
+            <!-- <a href="http://www.theboynamedme.com">Blog</a> | -->
 
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2017 <a href="http://davidmadethis.com">DavidMadeThis Concept</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2023 <a href="http://davidmadethis.com">Mini prject </a>.</strong> All rights reserved.
     </footer>
 
 
