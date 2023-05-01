@@ -48,26 +48,19 @@
                             <p class="text-muted text-center">{{ user.user_type }}</p>
 
                             <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
+                                {% comment %} <li class="list-group-item">
                                     <b>Followers</b> <a class="pull-right">{{ user.get_no_followers }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Following</b> <a class="pull-right">{{ user.get_no_following }}</a>
-                                </li>
-                                {% if user.user_type == 'Driver' %}
-                                    <li class="list-group-item">
-                                        <b>Rides shared</b> <a class="pull-right">{{ user.no_of_rides_shared }}</a>
-                                    </li>
-                                {% endif %}
-                                <li class="list-group-item">
-                                    <b>Rides taken</b> <a class="pull-right">{{ user.no_of_request_completed }}</a>
-                                </li>
-                                <li class="list-group-item">
+                                </li> {% endcomment %}
+                                
+                                {% comment %} <li class="list-group-item">
                                     <b>Broadcasts</b> <a class="pull-right">{{ user.get_no_broadcast }}</a>
-                                </li>
+                                </li> {% endcomment %}
 
                             </ul>
-                            {% if request.user.is_authenticated %}
+                            {% comment %} {% if request.user.is_authenticated %}
                                 {% if request.user != user %}
                                     {% if request.user in user.get_following %}
 
@@ -91,18 +84,18 @@
                                         {% endif %}
                                     </form>
                                 {% endif %}
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                         </div>
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
+                    {% comment %} <div class="box box-primary"> {% endcomment %}
+                        {% comment %} <div class="box-header with-border">
                             <h3 class="box-title "><i class="fa fa-users"></i>&nbsp;Followers</h3>
 
                             <!-- /.box-tools -->
-                        </div>
-                        <div class="box-body box-profile">
+                        </div> {% endcomment %}
+                        {% comment %} <div class="box-body box-profile">
                             <div class="row">
                                 {% for friend in user.followee.all|slice:'8' %}
 
@@ -121,41 +114,12 @@
                             </div>
 
                             {#                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>#}
-                        </div>
+                        </div> {% endcomment %}
                         <!-- /.box-body -->
-                    </div>
+                    {% comment %} </div> {% endcomment %}
                     <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <strong><i class="fa fa-user margin-r-5"></i>Personal info</strong>
-
-                            <p class="text-muted"><b>Username :&nbsp;</b>
-                                {{ user.username }}
-                                <br>
-                                <b>Sex :&nbsp;</b>
-                                {{ user.sex }}
-                                <br>
-                                <b>Short name:&nbsp;</b>
-                                {{ user.short_name }}
-                            </p>
-                                <hr>
-                            <strong><i class="fa fa-info-circle margin-r-5"></i>Bio</strong>
-
-                            <p class="text-muted">
-                                {{ user.get_profile.bio }}
-                            </p>
-                                 <hr>
-                            {% if request.user in user.get_following %}
-
-                                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                                <p class="text-muted">{{ user.address }}</p>
-
-                                <hr>
+                
+                        
 
                                 <strong><i class="fa fa-file-text-o margin-r-5"></i> Activity</strong>
 
@@ -168,18 +132,14 @@
 
                                 </p>
 
-                            {% endif %}
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
+          
 
 
                 </div>
                 <!-- /.col -->
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs">
+                        {% comment %} <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Broadcasts</a>
                             </li>
                             {% if request.user.is_authenticated %}
@@ -192,8 +152,8 @@
 
                             {% endif %}
                             </li>
-                        </ul>
-                        <div class="tab-content">
+                        </ul> {% endcomment %}
+                        {% comment %} <div class="tab-content">
                             <div class="tab-pane active" id="activity">
                                 <!-- Post -->
                                 {% include 'broadcast/broadcast_template.html' %}
@@ -202,9 +162,9 @@
                                 <!-- /.post -->
 
                                 <!-- /.post -->
-                            </div>
+                            </div> {% endcomment %}
                             <!-- /.tab-pane -->
-                            {% if request.user.is_authenticated %}
+                            {% comment %} {% if request.user.is_authenticated %}
                                 {% if 1 == 5 %}
                                     <div class="tab-pane " id="timeline">
                                         <!-- The timeline -->
@@ -310,9 +270,21 @@
                                         </ul>
                                     </div>
                                 {% endif %}
-                            {% endif %}
+                            {% endif %} {% endcomment %}
 
-                            <div class="tab-pane" id="profile">
+                            {% comment %} <div class="tab-pane" id="profile"> {% endcomment %}
+
+
+                                {% if user.user_type == 'Driver' %}
+                                    <li class="list-group-item">
+                                        <b>Rides shared</b> <a class="pull-right">{{ user.no_of_rides_shared }}</a>
+                                    </li>
+                                {% endif %}
+                                <li class="list-group-item">
+                                    <b>Rides taken</b> <a class="pull-right">{{ user.no_of_request_completed }}</a>
+                                </li>
+                                
+
 
                                 <div class="row">
                                     {% if user.get_profile.is_public %}
@@ -660,15 +632,8 @@
                                            </div>
                                         </div>
 
-                                    {% else %}
-
-
-                                        <div class="col-md-12">
-                                         <div class="callout callout-danger">
-                                 <h4>Nothing to see here&nbsp;<i class="fa fa-exclamation"></i></h4>
-
-                            <p>You Are seeing this because {{ user }}'s profile isn't public</p>
-                        </div>
+                                
+                        {% comment %} </div> {% endcomment %}
 
                                         </div>
 
@@ -694,6 +659,7 @@
         <!-- /.content -->
 
     </div>
+    
 
 {% endblock %}
 

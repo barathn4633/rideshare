@@ -168,17 +168,17 @@
                             <i class="fa fa-plus"></i>
                             Join Ride
                         </a>
-                        <a class="btn btn-success btn-xs pull-right">₦ {{ ride.cost }}</a>
+                        <a class="btn btn-success btn-xs pull-right">ETH {{ ride.cost }}</a>
                     </div>
                 </div>
             </li>
             <!-- END timeline item -->
         </ul>
 
-            <div class="modal modal-info" id="add{{ ride.id }}">
+            <div  class="modal modal-info" id="add{{ ride.id }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" >
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span></button>
                             <h4 class="modal-title">Ride : {{ ride|capfirst }}</h4>
@@ -204,7 +204,7 @@
                                 <br>
 
                                 <div class="field">
-                                    <input type="number" class="form-control" name="bearable" placeholder="Bearable cost (In Naira (₦))" required>
+                                    <input type="number" class="form-control" name="bearable" placeholder="Bearable cost in ETH" required>
                                 </div>
                                 <br>
 

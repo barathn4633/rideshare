@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MY RIDE | DASHBOARD </title>
+    <title>RideShareX | Menu </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{% static "app/dist/css/skins/app-skin.css" %}">
     <link rel="stylesheet" href="{% static "app/plugins/iCheck/flat/blue.css" %}">
     <!-- Modernizr -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'app/icons/apple-icon-57x57.png' %}">
+    {% comment %} <link rel="apple-touch-icon" sizes="57x57" href="{% static 'app/icons/apple-icon-57x57.png' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'app/icons/apple-icon-60x60.png' %}">
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'app/icons/apple-icon-72x72.png' %}">
     <link rel="apple-touch-icon" sizes="76x76" href="{% static 'app/icons/apple-icon-76x76.png' %}">
@@ -34,9 +34,9 @@
     <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'app/icons/android-icon-192x192.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'app/icons/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'app/icons/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'app/icons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'app/icons/favicon-16x16.png' %}"> {% endcomment %}
     <link rel="manifest" href="{% static 'app/icons/manifest.json' %}">
-    <link rel="icon" href="{% static 'app/icons/favicon.ico' %}">
+    <link rel="icon" href="{% static 'app/icons/favicon.jpg' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{% static 'app/icons/ms-icon-144x144.png' %}">
     <meta name="theme-color" content="#ffffff">
@@ -87,7 +87,7 @@ desired effect
 
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation" style="background-color: rgb(47, 47, 47);">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
@@ -218,10 +218,10 @@ desired effect
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar hidden-print">
+    <aside class="main-sidebar hidden-print" style="background-color: black;">
 
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+        <section class="sidebar" >
 
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
@@ -239,14 +239,15 @@ desired effect
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
-                <li class="header">NAVIGATION</li>
+                <li class="header" style="background-color: black; color: white;"><b>Menu Bar</b></li>
+                <br>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="#"><a href="{% url 'app:index' %}"><i class="fa fa-home"></i> <span>Home</span></a></li>
-                <li><a href="{% url 'app:dashboard_messages' %}"><i class="fa fa-envelope"></i> <span>Messages</span></a></li>
-                <li><a href="{% url 'app:dashboard_notifications' %}"><i class="fa fa-bell"></i> <span>Notifications</span></a></li>
-                <li class="bg-gray-light"><a><i class="fa fa-history"></i> <span>Timeline</span></a></li>
-                <li class="bg-gray-light"><a ><i class="fa fa-comments"></i> <span>Chat</span></a></li>
-                <li><a href="{% url 'app:preferences' %}"><i class="glyphicon glyphicon-cog"></i> <span>Preferences</span></a></li>
+                <li class="#"><a href="{% url 'app:index' %}"><i class="fa fa-home"></i> <span style="color: white;">Home</span></a></li>
+                <li><a href="{% url 'app:dashboard_messages' %}"><i class="fa fa-envelope"></i> <span style="color: white;">Messages</span></a></li>
+                {% comment %} <li><a href="{% url 'app:dashboard_notifications' %}"><i class="fa fa-bell"></i> <span style="color: white;">Notifications</span></a></li> {% endcomment %}
+                {% comment %} <li class="bg-gray-light"><a><i class="fa fa-history"></i> <span style="color: white;">Timeline</span></a></li>
+                <li class="bg-gray-light"><a ><i class="fa fa-comments"></i> <span>Chat</span></a></li> {% endcomment %}
+                <li><a href="{% url 'app:preferences' %}"><i class="glyphicon glyphicon-cog"></i> <span style="color: white;">Preferences</span></a></li>
 
             </ul>
             <!-- /.sidebar-menu -->
@@ -283,11 +284,11 @@ desired effect
             <a href="{% url 'app:about' %}">About</a> |
             <a href="{% url 'app:contact' %}">Contact</a> |
             <a href="{% url 'app:login' %}">Login/Signup</a> |
-            <a href="http://www.theboynamedme.com">Blog</a> |
+            <!-- <a href="http://www.theboynamedme.com">Blog</a> | -->
 
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="{% url 'app:about' %}">MY RIDE</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2023 <a href="{% url 'app:about' %}">RideShareX</a>.</strong> All rights reserved.
     </footer>
 
 

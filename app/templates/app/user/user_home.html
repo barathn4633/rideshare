@@ -390,12 +390,12 @@
                                     </a>
                                 {% endif %}
                                 {% if user.user_type == 'Driver' %}
-                                <li class="list-group-item">
-                                    <b>Rides shared</b> <a class="pull-right">{{ user.no_of_rides_shared }}</a>
-                                </li>
+                               <li class="list-group-item">
+                                    <b>Rides shared so far</b> <a class="pull-right">{{ user.no_of_rides_shared }}</a>
+                                </li> 
                             {% endif %}
                             <li class="list-group-item">
-                                <b>Rides taken</b> <a class="pull-right">{{ user.no_of_request_completed }}</a>
+                                <b>Rides taken till now</b> <a class="pull-right">{{ user.no_of_request_completed }}</a>
                             </li>
                             </div>
                             <!-- /.mail-box-messages -->

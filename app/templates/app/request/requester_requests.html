@@ -4,7 +4,7 @@
 {% block cont-header %}
     <section class="content-header">
         <h1>
-           All requested rides <small> - {{ request.user.username }}</small>
+           All requested rides <b> - {{ request.user.username }}</b>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{% url 'app:dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>

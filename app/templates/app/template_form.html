@@ -1,31 +1,26 @@
 {% load widget_tweaks %}
 {% for field in form %}
-
-    <label {% if field.errors %}class="text-danger" {% endif %}>{{ field.label_tag }} {% for i in field.errors.as_data|first %}
-
-        {{ i }}
-        {% endfor %}</label>
-        {% if field.label == 'Start time' or field.label == 'Arrival time'%}
-            <div class="form-group input-group bootstrap-timepicker timepicker">
-                {{ field }}
-                    <span class="input-group-addon" style="cursor: hand">
-              <i class="fa fa-clock-o"></i>
-            </span>
-
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <label {% if field.errors %}class="control-label text-danger"{% else %}class="control-label"{% endif %}>{{ field.label_tag }}</label>
+        {% if field.label == 'Start time' or field.label == 'Arrival time' %}
+            <div class="input-group bootstrap-timepicker timepicker">
+                {{ field|add_class:'form-control' }}
+                <span class="input-group-addon" style="cursor: hand">
+                    <i class="fa fa-clock-o"></i>
+                </span>
             </div>
-            {% elif field.label == 'Date'%}
+        {% elif field.label == 'Date' %}
             <div class="input-group date">
-
-               {{ field }}
+                {{ field|add_class:'form-control' }}
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
             </div>
-            {% else %}
-    <div class="form-group has-feedback {% if field.errors %}has-error {% endif %}">
-        {{ field|add_class:'form-control'|add_error_class:'input-danger' }}
+        {% else %}
+            {{ field|add_class:'form-control' }}
+        {% endif %}
+        {% if field.errors %}
+            <span class="help-block">{{ field.errors|first }}</span>
+        {% endif %}
     </div>
-            {% endif %}
-
-
 {% endfor %}

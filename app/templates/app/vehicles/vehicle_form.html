@@ -2,45 +2,108 @@
 {% load  static %}
 {% load humanize %}
 
-
 {% block cont-header %}
-    <section class="content-header">
-        <h1>
-            Add Ride <small>- Add a vehicle to your collection</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="{% url 'app:dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="{% url 'app:index' %}"><i class="fa fa-home"></i> Home</a></li>
-            <li class="active">Add Ride</li>
-        </ol>
-    </section>
+<section class="content-header">
+  <h1>Add Vehical <small>Add a vehicle to your Garage</small></h1>
+  <ol class="breadcrumb">
+    <li><a href="{% url 'app:dashboard' %}"><i class="fa fa-dashboard"></i> Menu</a></li>
+    <li><a href="{% url 'app:index' %}"><i class="fa fa-home"></i> Home</a></li>
+    <li class="active">Add Vehical</li>
+  </ol>
+</section>
+<style>
+    .register-section {
+  background-color: #f2f2f2;
+  padding: 60px 0;
+}
+
+.register-box {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 30px;
+  width: 100%;
+}
+
+.register-box-body {
+  margin-top: 30px;
+}
+
+.register-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.register-form .form-group {
+  margin-bottom: 20px;
+}
+
+.register-form label {
+  font-weight: bold;
+}
+
+.register-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.register-btn {
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 40px;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+  color: #007bff;
+  content: "/\00a0";
+  padding: 0 5px;
+}
+
+.breadcrumb > .active {
+  color: #555;
+}
+
+</style>
 {% endblock %}
 
-
 {% block body %}
+<section class="register-section">
+  <div class="container">
+    <div class="register-box">
+      <div class="register-box-body">
+        <h3 class="register-title"><i class="fa"></i> Add a new Vehical</h3>
 
-    <div class="register-box hold-transition register-page box box-info">
-        <div class="register-box-body">
-            <h3 class="login-box-msg "><i class="fa fa-car"></i>&nbsp;Add a new ride</h3>
+        <form action="" method="post" enctype="multipart/form-data" class="register-form">
+          {% csrf_token %}
+          {% include 'app/template_form.html' %}
+          <div class="form-group register-btn-container">
+            <button type="submit" class="btn btn-lg btn-primary register-btn">Add</button>
+          </div>
+        </form>
 
-            <form  action="" validate autocomplete="off" class="" role="form" method="post" enctype="multipart/form-data">
-
-                {% csrf_token %}
-                {% include 'app/template_form.html' %}
-
-                <div class="field buttons ">
-                    <button type="submit" class="btn btn-lg bg-blue form-control-static">Add</button>
-                </div>
-
-                <span id="invalid"></span>
-
-            </form>
-
-        </div>
-        <!-- /.form-box -->
+        <span id="invalid"></span>
+      </div>
+      <!-- /.register-box-body -->
     </div>
-
     <!-- /.register-box -->
-
-
+  </div>
+  <!-- /.container -->
+</section>
 {% endblock %}
