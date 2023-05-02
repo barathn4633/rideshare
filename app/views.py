@@ -295,7 +295,16 @@ def vehicle_share(request, user_id, vehicle_id):
         else:
             form.fields['no_pass'] = fm.IntegerField(widget=forms.TextInput(attrs={'max':ride.seats,'type':'number', 'min':"1",'required':True,'class':'form-control'}))
             form.fields['no_pass'].label = 'Number of Passengers'
-            form.fields['cost'] = fm.IntegerField(widget=forms.TextInput(attrs={'type':'number', 'min':"10", 'required':True,'placeholder':'In Naira (₦) ','class':'form-control'}))
+            form.fields['cost'] = fm.DecimalField(
+    widget=forms.TextInput(attrs={
+        'type': 'number',
+        'min': '10',
+        'step': '0.0001',
+        'required': True,
+        'placeholder': 'In ETH',
+        'class': 'form-control'
+    })
+)
 
             return render(request, 'app/vehicles/share_ride.html', {'user': user, 'ride': ride, 'form':form})
         pass
@@ -304,7 +313,16 @@ def vehicle_share(request, user_id, vehicle_id):
 
         form.fields['no_pass'] = fm.IntegerField(widget=forms.TextInput(attrs={'max':ride.seats,'type':'number', 'min':"1",'class':'form-control'}))
         form.fields['no_pass'].label = 'Number of Passengers'
-        form.fields['cost'] = fm.IntegerField(widget=forms.TextInput(attrs={'type':'number', 'min':"10", 'required':True,'placeholder':'In Naira (₦) ','class':'form-control'}))
+        form.fields['cost'] = fm.DecimalField(
+    widget=forms.TextInput(attrs={
+        'type': 'number',
+        'min': '10',
+        'step': '0.0001',
+        'required': True,
+        'placeholder': 'In ETH',
+        'class': 'form-control'
+    })
+)
 
         return render(request, 'app/vehicles/share_ride.html', {'user': user, 'ride': ride, 'form':form})
 
@@ -561,7 +579,7 @@ def request_view(request,request_id):
     elif request.user.user_type == 'Driver':
         context = {
 
-            'user_requests': req,
+            'f': req,
             
         }
         return render(request, 'app/request/single_request.html', context)

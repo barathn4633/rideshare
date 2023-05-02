@@ -214,7 +214,7 @@ class Request(models.Model):
     dest = models.CharField(_('destination'), max_length=256, blank=False)
     reg_date = models.DateTimeField(_('registration date'), default=timezone.now)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    bearable = models.DecimalField(_('bearable cost'),max_digits=40, decimal_places=15, blank=False)
+    bearable = models.DecimalField(_('bearable cost'),max_digits=40, decimal_places=10, blank=False)
     status = models.CharField(_('status'), max_length=256, blank=False, default='pending')
     ride = models.ForeignKey(VehicleSharing, on_delete=models.CASCADE)
     payment_made = models.BooleanField(_('payment made or not'), default=False)
