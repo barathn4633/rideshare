@@ -1,4 +1,4 @@
-##### DJANGO car pool system
+# DJANGO car pool system
 ## payment with blockchain
 ### Installation
 requires python > 3 django 1.9
